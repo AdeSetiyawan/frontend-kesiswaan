@@ -1,8 +1,8 @@
 import './App.css'
 import { Routes,Route } from 'react-router-dom'
 import { lazy, Suspense } from 'react';
- const LandingPage = lazy(()=>import('./assets/pages/landingpage'));
- const NotFound = lazy(()=>import('./assets/pages/NotFound'));
+ const LandingPage = lazy(()=>import('./pages/landingpage'));
+ const NotFound = lazy(()=>import('./pages/NotFound'));
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
         <Route path='/' element={<LandingPage />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
-      </Suspense>
+    </Suspense>
   );
 }
 
