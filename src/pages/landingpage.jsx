@@ -14,6 +14,8 @@ import { useNavigate } from 'react-router-dom'
 import MessageValidate from '../assets/components/msgValidate.jsx'
 import useAuth from '../hooks/useAuth.js'
 import { CircularProgress, Tooltip } from '@mui/material';
+import { Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+
 function LandingPage(){
     const Navigate =useNavigate();
     const [form, setForm ] = useState({username:"", password:""});
@@ -25,6 +27,12 @@ function LandingPage(){
     const [peringatan, setPeringatan] = useState("");
     const [loading, setLoading]= useState(false);
 
+
+    // dialog message 
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
     
     if(user !== null){
         navigate('/dashboard');
@@ -117,9 +125,27 @@ function LandingPage(){
                                         <span className='font-extrabold'>
                                             SiSKANJA
                                         </span>
-                                        <Tooltip title="Sistem Informasi SMK Negeri 1 Jatiroto, adalah sebuah sistem informasi yang digunakan untuk membantu dalam proses pemanajemenan informasi dan administrasi terkait seluruh kegiatan yang ada dalam sekolah. Meliputi Kesiswaan, kurikulum, humas dan Sarpras. ">
-                                            <InfoIcon fontSize='small'/>
-                                        </Tooltip>
+                                
+                                            <InfoIcon fontSize='small' onClick={handleClickOpen}/>
+                   
+                                        <Dialog open={open} onClose={handleClose}>
+                                            <DialogTitle>
+                                                <span className=' tracking-wider font-extrabold'>
+                                                    Tentang SiSKANJA
+                                                </span>
+                                            </DialogTitle>
+                                                <DialogContent>
+                                                    <p align='justify'>
+                                                        SiSKANJA atau Sistem Informasi SMK Negeri 1 Jatiroto adalah sebuah sistem informasi yang digunakan untuk membantu dalam proses pemanajemenan informasi dan administrasi terkait seluruh kegiatan yang ada dalam sekolah, meliputi Kesiswaan, kurikulum, humas dan Sarpras. Sehingga informasi bisa diakses dengan cepat dan juga akurat.
+                                                    </p>
+                                                    <p className='text-end text-sm mt-3 italic font-extralight'>
+                                                        TIM IT SMKN 1 Jatiroto
+                                                    </p>
+                                                </DialogContent>
+                                            <DialogActions>
+                                            <Button onClick={handleClose} color="error">Tutup</Button>
+                                            </DialogActions>
+                                        </Dialog>
                                     </p>
                                 
                                 </div>
