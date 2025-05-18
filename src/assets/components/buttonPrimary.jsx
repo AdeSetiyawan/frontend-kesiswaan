@@ -1,4 +1,4 @@
-export default function BtnPrimary ({name="", type="submit",label="Button",icon}){
+export default function BtnPrimary ({name="", type="submit",label="Button",icon,disabled="false"}){
     return (
         <>
             <button 
@@ -16,14 +16,23 @@ export default function BtnPrimary ({name="", type="submit",label="Button",icon}
              active:bg-blue-700
              cursor-pointer
             "
+            disabled={disabled}
             >
                 <div className="flex gap-1 justify-center items-center">
-                    <div>
-                     {icon && <span>{icon}</span>}
-                    </div>
-                    <div>
-                        {label}
-                    </div>
+                    {
+                        disabled === false ?
+                        <>
+                            <div>
+                            {icon && <span>{icon}</span>}
+                            </div>
+                            <div>
+                                {label}
+                            </div>
+                        </>:
+                        <>
+                            {label}
+                        </>
+                    }
 
                 </div>
             </button>
