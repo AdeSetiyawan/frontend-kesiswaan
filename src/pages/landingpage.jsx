@@ -10,6 +10,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
 import InfoIcon from '@mui/icons-material/Info';
+import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from 'react-router-dom'
 import MessageValidate from '../assets/components/msgValidate.jsx'
 import useAuth from '../hooks/useAuth.js'
@@ -27,17 +28,24 @@ function LandingPage(){
     const [peringatan, setPeringatan] = useState("");
     const [loading, setLoading]= useState(false);
 
-
     // dialog message 
     const [open, setOpen] = useState(false);
-
     const handleClickOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+
+
+    
+
     
     if(user !== null){
         navigate('/dashboard');
     }
     
+    const closePeringatan = ()=>{
+        setPeringatan("");
+    }
+
     const handleChange =(e) =>{
             setForm({...form, [e.target.name]: e.target.value});
     };
@@ -53,7 +61,7 @@ function LandingPage(){
                 Navigate('/dashboard');
             }
             catch(err){
-                setPeringatan('Ada kesalahan ketika login menggunakan username dan password anda, silahkan periksa ulang atau hubungi admin!' );
+                setPeringatan(err.response?.status +`=  "Ada kesalahan ketika login menggunakan username dan password anda, silahkan periksa ulang atau hubungi admin!" `);
                 setForm({username:"",password:""});
                  setMsgUsername("");
                   setMsgPassword("");
@@ -61,6 +69,8 @@ function LandingPage(){
             }finally {
             setLoading(false); // ⬅️ Stop loading
             }
+
+            
         }else{
             if(form.username === ""){
                 setMsgUsername("Username wajib diisi!");
@@ -126,7 +136,7 @@ function LandingPage(){
                                             SiSKANJA
                                         </span>
                                 
-                                            <InfoIcon fontSize='small' onClick={handleClickOpen}/>
+                                            <InfoIcon fontSize='small' onClick={handleClickOpen} className=' cursor-pointer hover:text-gray-300 active:text-gray-200'/>
                    
                                         <Dialog open={open} onClose={handleClose}>
                                             <DialogTitle>
@@ -153,7 +163,10 @@ function LandingPage(){
                             {
                                 peringatan !== "" ? 
                                 <>
-                                    <div className='text-[10pt] rounded-2xl bg-red-800 p-3 text-gray-100'>
+                                    <div className='text-[10pt] rounded-2xl bg-red-800 p-3 text-gray-100 relative ${className}'>
+                                        <div className='absolute right-1 top-1'>
+                                            <CloseIcon onClick={closePeringatan} className=' cursor-pointer text-orange-300 hover:text-orange-400 active:text-orange-200' />
+                                        </div>
                                         Status : <br/>
                                         <p align="justify" className='text-[8pt] font-extralight'>
                                             {peringatan}

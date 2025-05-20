@@ -4,6 +4,8 @@ import { lazy, Suspense } from 'react';
 import Dashboard from './pages/dashboard';
 import Middleware from './hooks/protectedroute';
 import '@fontsource/roboto'; // default weight 400
+import Beranda from './pages/dashboard/beranda';
+import Pelanggaran from './pages/dashboard/pelanggaran';
  const LandingPage = lazy(()=>import('./pages/landingpage'));
  const NotFound = lazy(()=>import('./pages/NotFound'));
 
@@ -25,12 +27,11 @@ function App() {
               <Dashboard />
             </Middleware>
           }>
-            {/* 
+            
                 <Route index element={<Beranda />} />  default child route 
                 <Route path='beranda' element={<Beranda />} />
-                <Route path='profil' element={<Profil />} />
-                <Route path='pengaturan' element={<Pengaturan />} />
-            */}
+                <Route path='pelanggaran' element={<Pelanggaran />} />
+          
           </Route>
 
         <Route path='*' element={<NotFound />} />

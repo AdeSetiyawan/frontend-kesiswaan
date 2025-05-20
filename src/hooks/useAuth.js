@@ -28,9 +28,11 @@ export default function useAuth(){
     },[]);
 
     const login = async(email, password)=>{
-        const res = await api.post('/login/guru',{email, password});
-        localStorage.setItem('token', res.data.token);
-        await fetchUser();
+
+            const res = await api.post('/login/guru',{email, password});
+            localStorage.setItem('token', res.data.token);
+            await fetchUser();
+
     };
 
     const logout = async()=>{
