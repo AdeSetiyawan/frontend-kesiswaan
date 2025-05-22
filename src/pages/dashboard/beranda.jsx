@@ -1,6 +1,7 @@
 import { Await } from "react-router-dom"
 import api from "../../config/axios"
 import { useEffect, useState } from "react"
+import Widget from "../../assets/components/widget"
 
 export default function Beranda()
 {
@@ -44,20 +45,35 @@ export default function Beranda()
     },[])
 
     if(state.siswa === null ){
-        return "<p>Loading ... </p>";
+        return (<div className='relative w-full h-full p-4'>
+        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+          <span className="loading loading-dots loading-xl "></span>
+        </div>
+      </div>)
     }
 
     return (
-        <>
-            <h1>
-                Silahkan anda memanfaatkan fasilitas kami
-            </h1>
-
-            <ul>
-                {
-                    state.siswa.data?.length
-                }
-            </ul>
-        </>
+        <div className="flex gap-2 flex-wrap justify-center items-center">
+            <div className="w-3/8 md:w-2/16 shadow rounded-lg p-4 flex flex-col justify-center items-center tracking-wider bg-indigo-900">
+                <div>
+                    Total Siswa
+                </div>
+                <div>
+                    {
+                        state.siswa.data?.length
+                    }
+                </div>
+            </div>
+            <div className="w-3/8 md:w-2/16 shadow bg-emerald-900 rounded-lg p-4 flex flex-col justify-center items-center tracking-wider">
+                <div>
+                    Total Siswa
+                </div>
+                <div>
+                    {
+                        state.siswa.data?.length
+                    }
+                </div>
+            </div>
+        </div>
     )
 }
